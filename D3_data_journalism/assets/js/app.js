@@ -36,12 +36,32 @@ d3.csv("assets/data/data.csv")
     var bottom = d3.axisBottom(x);
     var left = d3.axisLeft(y);
 
-    // Appending axes to chart
+// Appending axes to chart
     chart.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(bottom);
 
     chart.append("g")
          .call(left);
+         
+// generating circles
+    chart.selectAll("circle")
+    .data(table)
+    .enter()
+    .append("circle")
+    .attr("cx", d => x(d.age))
+    .attr("cy", d => y(d.smokes))
+    .attr("r", "15")
+    .attr("fill", "lightblue")
+    .attr("opacity", "0.5");
+
+    chart.selectAll("label")
+    .data(table)
+    .enter()
+    .append("text")
+    .text(d => d.abbr)
+    .attr("font-size",12)
+    .attr("x", d => x(d.age)-8)
+    .attr("y", d => y(d.smokes)+4);
 
 });
