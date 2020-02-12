@@ -43,25 +43,37 @@ d3.csv("assets/data/data.csv")
 
     chart.append("g")
          .call(left);
-         
+
 // generating circles
     chart.selectAll("circle")
-    .data(table)
-    .enter()
-    .append("circle")
-    .attr("cx", d => x(d.age))
-    .attr("cy", d => y(d.smokes))
-    .attr("r", "15")
-    .attr("fill", "lightblue")
-    .attr("opacity", "0.5");
+        .data(table)
+        .enter()
+        .append("circle")
+        .attr("cx", d => x(d.age))
+        .attr("cy", d => y(d.smokes))
+        .attr("r", "15")
+        .attr("fill", "orange")
+        .attr("opacity", "0.5");
 
     chart.selectAll("label")
-    .data(table)
-    .enter()
-    .append("text")
-    .text(d => d.abbr)
-    .attr("font-size",12)
-    .attr("x", d => x(d.age)-8)
-    .attr("y", d => y(d.smokes)+4);
+        .data(table)
+        .enter()
+        .append("text")
+        .text(d => d.abbr)
+        .attr("font-size",12)
+        .attr("x", d => x(d.age)-8)
+        .attr("y", d => y(d.smokes)+4);
 
+// Create axes labels
+    chart.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left +50)
+        .attr("x", 0 - (height/2))
+        .attr("class", "axisText")
+        .text("Average # of Smokes");
+
+    chart.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top +20})`)
+        .attr("class", "axisText")
+        .text("Age");
 });
